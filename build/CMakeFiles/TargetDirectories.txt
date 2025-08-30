@@ -1,0 +1,3 @@
+Z:/CPP/TimeM/build/CMakeFiles/TimeManagementApp.dir
+Z:/CPP/TimeM/build/CMakeFiles/ALL_BUILD.dir
+Z:/CPP/TimeM/build/CMakeFiles/ZERO_CHECK.dir

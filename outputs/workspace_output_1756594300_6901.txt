@@ -1,0 +1,32 @@
+[ 12%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/main.cpp.o
+[ 25%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/Task.cpp.o
+/workspace/src/Task.cpp: In static member function ‘static Task Task::deserialize(const std::string&)’:
+/workspace/src/Task.cpp:174:58: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  174 |         for (int i = 0; i < subtaskCount && currentIndex < tokens.size(); ++i) {
+      |                                             ~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/src/Task.cpp:177:51: warning: comparison of integer expressions of different signedness: ‘int’ and ‘std::vector<std::__cxx11::basic_string<char> >::size_type’ {aka ‘long unsigned int’} [-Wsign-compare]
+  177 |             for (int j = 0; j < 7 && currentIndex < tokens.size(); ++j) {
+      |                                      ~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+[ 37%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/TimeTracker.cpp.o
+[ 50%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/PomodoroTimer.cpp.o
+[ 62%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/TaskManager.cpp.o
+[ 75%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/FileManager.cpp.o
+[ 87%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/UserInterface.cpp.o
+/workspace/src/UserInterface.cpp: In member function ‘void UserInterface::saveData() const’:
+/workspace/src/UserInterface.cpp:856:26: error: passing ‘const FileManager’ as ‘this’ argument discards qualifiers [-fpermissive]
+  856 |     fileManager.saveTasks(taskManager.getAllTasks());
+      |     ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /workspace/src/../include/UserInterface.h:8,
+                 from /workspace/src/UserInterface.cpp:1:
+/workspace/src/../include/FileManager.h:15:10: note:   in call to ‘bool FileManager::saveTasks(const std::vector<Task>&, const std::string&)’
+   15 |     bool saveTasks(const std::vector<Task>& tasks, const std::string& filename = "tasks.dat");
+      |          ^~~~~~~~~
+/workspace/src/UserInterface.cpp:857:29: error: passing ‘const FileManager’ as ‘this’ argument discards qualifiers [-fpermissive]
+  857 |     fileManager.saveSettings(pomodoroTimer);
+      |     ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~
+/workspace/src/../include/FileManager.h:19:10: note:   in call to ‘bool FileManager::saveSettings(const PomodoroTimer&, const std::string&)’
+   19 |     bool saveSettings(const PomodoroTimer& pomodoroTimer, const std::string& filename = "settings.dat");
+      |          ^~~~~~~~~~~~
+make[2]: *** [CMakeFiles/TimeManagementApp.dir/build.make:160: CMakeFiles/TimeManagementApp.dir/src/UserInterface.cpp.o] Error 1
+make[1]: *** [CMakeFiles/Makefile2:83: CMakeFiles/TimeManagementApp.dir/all] Error 2
+make: *** [Makefile:91: all] Error 2
