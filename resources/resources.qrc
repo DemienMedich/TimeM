@@ -1,0 +1,20 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+    <qresource prefix="/">
+        <file>icons/app_icon.png</file>
+        <file>icons/task.png</file>
+        <file>icons/timer.png</file>
+        <file>icons/pomodoro.png</file>
+        <file>icons/statistics.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/add.png</file>
+        <file>icons/edit.png</file>
+        <file>icons/delete.png</file>
+        <file>icons/start.png</file>
+        <file>icons/pause.png</file>
+        <file>icons/stop.png</file>
+        <file>styles/light.qss</file>
+        <file>styles/dark.qss</file>
+        <file>translations/timemanager_ru.qm</file>
+    </qresource>
+</RCC>
