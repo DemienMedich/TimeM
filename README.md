@@ -34,13 +34,26 @@ A comprehensive C++ application designed to help users manage their time effecti
 - Load previous session data
 - Automatic backup of data files
 
+### GUI Interface (New!)
+- Modern graphical user interface built with Qt
+- Intuitive task management with visual indicators
+- Interactive charts for statistics
+- Visual Pomodoro timer with progress indication
+- Dark and light themes
+- Full Russian localization support
+
 ## Getting Started
 
 ### Prerequisites
 - C++17 compatible compiler
 - CMake 3.10 or higher
+- Qt 5.15 or higher (for GUI version)
 
 ### Building the Application
+
+For detailed build instructions, please refer to the [BUILD_INSTRUCTIONS.md](BUILD_INSTRUCTIONS.md) file.
+
+#### Quick Start (Console Version)
 
 1. Clone the repository
 ```
@@ -64,14 +77,32 @@ cmake ..
 cmake --build .
 ```
 
+#### Building the GUI Version
+
+```
+mkdir build
+cd build
+cmake .. -DBUILD_GUI=ON
+cmake --build .
+```
+
 ### Running the Application
+
+#### Console Version
 ```
 ./TimeManagementApp
 ```
 
+#### GUI Version
+```
+./TimeManagementAppGUI
+```
+
 ## Usage Guide
 
-### Main Menu
+For detailed usage instructions, please refer to the [USAGE_GUIDE.md](USAGE_GUIDE.md) file.
+
+### Main Menu (Console Version)
 The application starts with a main menu offering access to all features:
 1. Task Management
 2. Time Tracking
@@ -80,30 +111,20 @@ The application starts with a main menu offering access to all features:
 5. Settings
 6. Exit
 
-### Task Management
-- **View Tasks**: Browse all, pending, or completed tasks
-- **Add Task**: Create new tasks with title, description, priority, and deadline
-- **Edit Task**: Modify existing task details
-- **Delete Task**: Remove tasks from the system
+### GUI Version
+The GUI version provides a tabbed interface with:
+- Tasks tab for managing your task list
+- Time Tracking tab for monitoring time spent on tasks
+- Pomodoro tab for using the Pomodoro technique
+- Statistics tab for analyzing your productivity
 
-### Time Tracking
-- **Start Tracking**: Begin tracking time for a selected task
-- **Pause/Resume**: Temporarily stop or continue time tracking
-- **Stop Tracking**: End the tracking session and save the time to the task
+## Localization
 
-### Pomodoro Timer
-- **Start Pomodoro**: Begin a work session (default: 25 minutes)
-- **Pause/Resume**: Temporarily stop or continue the current session
-- **Check Status**: View current session type, remaining time, and progress
+The application supports both English and Russian languages. You can switch languages in the Settings menu.
 
-### Statistics
-- **Task Statistics**: View completion rates and task distribution
-- **Time Statistics**: Analyze time spent on different tasks
-- **Pomodoro Statistics**: Track completed sessions and productivity patterns
-
-### Settings
-- **Pomodoro Settings**: Customize work duration, break duration, and session count
-- **Save/Load Settings**: Persist your preferences between sessions
+### Available Languages
+- English (default)
+- Russian (Русский)
 
 ## Anti-Procrastination Techniques
 
@@ -118,24 +139,51 @@ This application implements several proven anti-procrastination strategies:
 ## File Structure
 
 ```
-time-management-app/
+TimeManagementApp/
 ├── include/                 # Header files
-│   ├── Task.h               # Task class definition
-│   ├── TimeTracker.h        # Time tracking functionality
-│   ├── PomodoroTimer.h      # Pomodoro timer implementation
-│   ├── TaskManager.h        # Task management system
-│   ├── FileManager.h        # Data persistence
-│   └── UserInterface.h      # Console UI implementation
+│   ├── core/                # Core functionality
+│   │   ├── Task.h
+│   │   ├── TimeTracker.h
+│   │   ├── PomodoroTimer.h
+│   │   ├── TaskManager.h
+│   │   └── FileManager.h
+│   └── gui/                 # GUI components
+│       ├── MainWindow.h
+│       ├── TaskWidget.h
+│       ├── TimeTrackerWidget.h
+│       ├── PomodoroWidget.h
+│       ├── StatisticsWidget.h
+│       └── SettingsDialog.h
 ├── src/                     # Source files
-│   ├── main.cpp             # Application entry point
-│   ├── Task.cpp             # Task class implementation
-│   ├── TimeTracker.cpp      # Time tracking implementation
-│   ├── PomodoroTimer.cpp    # Pomodoro timer implementation
-│   ├── TaskManager.cpp      # Task management implementation
-│   ├── FileManager.cpp      # Data persistence implementation
-│   └── UserInterface.cpp    # Console UI implementation
+│   ├── core/                # Core implementation
+│   │   ├── Task.cpp
+│   │   ├── TimeTracker.cpp
+│   │   ├── PomodoroTimer.cpp
+│   │   ├── TaskManager.cpp
+│   │   └── FileManager.cpp
+│   ├── gui/                 # GUI implementation
+│   │   ├── MainWindow.cpp
+│   │   ├── TaskWidget.cpp
+│   │   ├── TimeTrackerWidget.cpp
+│   │   ├── PomodoroWidget.cpp
+│   │   ├── StatisticsWidget.cpp
+│   │   └── SettingsDialog.cpp
+│   ├── main.cpp             # Console app entry point
+│   └── main_gui.cpp         # GUI app entry point
+├── forms/                   # Qt Designer UI files
+│   ├── mainwindow.ui
+│   ├── taskwidget.ui
+│   └── ...
+├── resources/               # Application resources
+│   ├── icons/               # Icons
+│   ├── styles/              # CSS style sheets
+│   └── translations/        # Localization files
+│       ├── timemanager_ru.ts
+│       └── timemanager_ru.qm
 ├── CMakeLists.txt           # CMake build configuration
-└── README.md                # Project documentation
+├── README.md                # Project documentation
+├── USAGE_GUIDE.md           # Usage instructions
+└── BUILD_INSTRUCTIONS.md    # Build instructions
 ```
 
 ## License
@@ -146,3 +194,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 - The Pomodoro Technique was developed by Francesco Cirillo
 - The Eisenhower Matrix was inspired by Dwight D. Eisenhower's approach to productivity
+- GUI built with Qt framework

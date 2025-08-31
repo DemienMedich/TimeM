@@ -1,0 +1,13 @@
+Warning: dropping duplicate messages in 'resources/translations/timemanager_ru.qm':
+
+* Context: TaskWidget
+* Source: Edit Task
+
+* Context: TaskWidget
+* Source: Pending
+
+* Context: TaskWidget
+* Source: Completed
+
+Updating 'resources/translations/timemanager_ru.qm'...
+    Generated 198 translation(s) (198 finished and 0 unfinished)

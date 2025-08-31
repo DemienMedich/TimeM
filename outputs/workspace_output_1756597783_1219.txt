@@ -1,0 +1,9 @@
+total 72
+drwxr-xr-x 2 root root   181 Aug 30 23:35 .
+drwxr-xr-x 9 root root  4096 Aug 30 23:47 ..
+-rw-r--r-- 1 root root  9458 Aug 30 23:32 mainwindow.ui
+-rw-r--r-- 1 root root  8153 Aug 30 23:34 pomodorowidget.ui
+-rw-r--r-- 1 root root 14179 Aug 30 23:35 settingsdialog.ui
+-rw-r--r-- 1 root root 13838 Aug 30 23:34 statisticswidget.ui
+-rw-r--r-- 1 root root  4552 Aug 30 23:32 taskwidget.ui
+-rw-r--r-- 1 root root  6675 Aug 30 23:33 timetrackerwidget.ui

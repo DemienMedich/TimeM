@@ -1,0 +1,1 @@
+{'role': 'user', 'content': '<tool_result> <complete> ToolResult(success=True, output=\'{\\n  "status": "complete"\\n}\') </complete> </tool_result>'}

@@ -14,4 +14,8 @@ Enter your choice (1-6): Invalid choice. Please try again.
 
 Enter your choice (1-6): Invalid choice. Please try again.
 
+Enter your choice (1-6): Invalid choice. Please try again.
+
+Enter your choice (1-6): Invalid choice. Please try again.
+
 Enter your choice (1-6): 
