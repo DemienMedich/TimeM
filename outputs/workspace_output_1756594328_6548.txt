@@ -1,4 +1,0 @@
-[ 12%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/main.cpp.o
-[ 25%] Building CXX object CMakeFiles/TimeManagementApp.dir/src/UserInterface.cpp.o
-[ 37%] Linking CXX executable TimeManagementApp
-[100%] Built target TimeManagementApp

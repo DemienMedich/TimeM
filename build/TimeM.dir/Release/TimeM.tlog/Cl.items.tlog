@@ -1,0 +1,10 @@
+Z:\CPP\TimeM\src\main_gui.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\main_gui.obj
+Z:\CPP\TimeM\src\TaskManager.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\TaskManager.obj
+Z:\CPP\TimeM\src\PomodoroTimer.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\PomodoroTimer.obj
+Z:\CPP\TimeM\external\imgui\imgui.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui.obj
+Z:\CPP\TimeM\external\imgui\imgui_demo.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_demo.obj
+Z:\CPP\TimeM\external\imgui\imgui_draw.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_draw.obj
+Z:\CPP\TimeM\external\imgui\imgui_tables.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_tables.obj
+Z:\CPP\TimeM\external\imgui\imgui_widgets.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_widgets.obj
+Z:\CPP\TimeM\external\imgui\backends\imgui_impl_glfw.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_impl_glfw.obj
+Z:\CPP\TimeM\external\imgui\backends\imgui_impl_opengl3.cpp;Z:\CPP\TimeM\build\TimeM.dir\Release\imgui_impl_opengl3.obj

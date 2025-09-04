@@ -1,1 +1,0 @@
-{'role': 'assistant', 'content': 'Похоже, у нас возникли проблемы с выполнением команды git. Давайте проверим, установлен ли Git в системе:\n\n<function_calls>\n<execute-command>\nwhich git\n</execute-command>\n</function_calls>', 'tool_calls': None}

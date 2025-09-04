@@ -1,2 +1,0 @@
-./gui_localization_plan.md
-./localization_ru.txt

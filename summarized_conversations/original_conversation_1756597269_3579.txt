@@ -1,1 +1,0 @@
-{'role': 'user', 'content': '<tool_result> <create-file> ToolResult(success=True, output="File \'include/Task_RU.h\' created successfully.") </create-file> </tool_result>'}

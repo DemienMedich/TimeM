@@ -1,70 +1,39 @@
-cmake_minimum_required(VERSION 3.10)
-project(TimeManagementApp)
+cmake_minimum_required(VERSION 3.15)
+project(TimeM)
 
-# Опция для сборки GUI
-option(BUILD_GUI "Build the GUI component" ON)
-
-# Set C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories
-include_directories(include)
+# Подключаем ImGui
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/external/imgui)
 
-# Common source files (без UI-зависимых файлов)
-set(COMMON_SOURCES
-    src/Task.cpp
-    src/TimeTracker.cpp
-    src/PomodoroTimer.cpp
+set(IMGUI_SOURCES
+    ${IMGUI_DIR}/imgui.cpp
+    ${IMGUI_DIR}/imgui_demo.cpp
+    ${IMGUI_DIR}/imgui_draw.cpp
+    ${IMGUI_DIR}/imgui_tables.cpp
+    ${IMGUI_DIR}/imgui_widgets.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_glfw.cpp
+    ${IMGUI_DIR}/backends/imgui_impl_opengl3.cpp
+)
+
+# Исправленный единый add_executable
+add_executable(TimeM
+    src/main_gui.cpp
     src/TaskManager.cpp
-    src/FileManager.cpp
+    src/PomodoroTimer.cpp
+    ${IMGUI_SOURCES}
 )
 
-if(BUILD_GUI)
-    message(STATUS "Building GUI component")
-    
-    # Настройка Qt
-    set(CMAKE_AUTOMOC ON)
-    set(CMAKE_AUTORCC ON)
-    set(CMAKE_AUTOUIC ON)
-    
-    # Поиск Qt
-    find_package(Qt5 COMPONENTS Widgets Core REQUIRED)
-    
-    # GUI source files
-    set(GUI_SOURCES
-        src/main.cpp
-        src/UserInterface.cpp
-        # Добавьте другие GUI-специфичные файлы здесь
-    )
-    
-    # Create GUI executable
-    add_executable(TimeManagementApp ${COMMON_SOURCES} ${GUI_SOURCES})
-    
-    # Link Qt libraries
-    target_link_libraries(TimeManagementApp Qt5::Widgets Qt5::Core)
-    
-else()
-    message(STATUS "Building without GUI component")
-    
-    # Console source files
-    set(CONSOLE_SOURCES
-        src/main_console.cpp  # Вам нужно создать этот файл
-        src/ConsoleInterface.cpp  # И этот, если нужно
-    )
-    
-    # Create console executable
-    add_executable(TimeManagementApp ${COMMON_SOURCES} ${CONSOLE_SOURCES})
-endif()
-
-# Add compiler flags
-if(MSVC)
-    target_compile_options(TimeManagementApp PRIVATE /W4)
-else()
-    target_compile_options(TimeManagementApp PRIVATE -Wall -Wextra -pedantic)
-endif()
-
-# Install target
-install(TARGETS TimeManagementApp
-    RUNTIME DESTINATION bin
+# Инклюды
+target_include_directories(TimeM PRIVATE
+    src
+    ${IMGUI_DIR}
+    ${IMGUI_DIR}/backends
 )
+
+# Зависимости
+find_package(glfw3 CONFIG REQUIRED)
+find_package(glad CONFIG REQUIRED)
+find_package(OpenGL REQUIRED)
+
+target_link_libraries(TimeM PRIVATE glfw glad::glad OpenGL::GL)

@@ -1,2 +1,0 @@
-./build/CMakeFiles/TimeManagementApp.dir/compiler_depend.ts
-./resources/translations/timemanager_ru.ts

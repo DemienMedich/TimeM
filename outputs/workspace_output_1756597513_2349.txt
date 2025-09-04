@@ -1,6 +1,0 @@
-./forms/mainwindow.ui
-./forms/pomodorowidget.ui
-./forms/settingsdialog.ui
-./forms/statisticswidget.ui
-./forms/taskwidget.ui
-./forms/timetrackerwidget.ui

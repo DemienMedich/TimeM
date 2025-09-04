@@ -1,83 +1,87 @@
-#include <QApplication>
-#include <QTranslator>
-#include <QLocale>
-#include <QSettings>
-#include <QDir>
-#include <QMessageBox>
-#include <QFile>
-#include <QStyleFactory>
-#include "gui/MainWindow.h"
+#include "TaskManager.h"
+#include "PomodoroTimer.h"
 
-int main(int argc, char *argv[])
-{
-    // Создаем приложение
-    QApplication app(argc, argv);
-    
-    // Настройка информации о приложении
-    QApplication::setApplicationName("TimeManagementApp");
-    QApplication::setApplicationDisplayName("Управление временем");
-    QApplication::setApplicationVersion("1.0.0");
-    QApplication::setOrganizationName("NinjaTech");
-    QApplication::setOrganizationDomain("ninjatech.com");
-    
-    // Загрузка настроек
-    QSettings settings;
-    
-    // Загрузка темы
-    QString theme = settings.value("app/theme", "light").toString();
-    if (theme == "dark") {
-        QFile styleFile(":/styles/dark.qss");
-        if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
-            QString style = styleFile.readAll();
-            app.setStyleSheet(style);
-            styleFile.close();
-        }
-    } else {
-        QFile styleFile(":/styles/light.qss");
-        if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
-            QString style = styleFile.readAll();
-            app.setStyleSheet(style);
-            styleFile.close();
-        }
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
+
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
+int main() {
+    if (!glfwInit()) return -1;
+
+    GLFWwindow* window = glfwCreateWindow(800, 600, "TimeM - ImGui Edition", NULL, NULL);
+    if (!window) { glfwTerminate(); return -1; }
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        return -1;
     }
-    
-    // Загрузка локализации
-    QString language = settings.value("app/language", QLocale::system().name()).toString();
-    QTranslator translator;
-    
-    // Пытаемся загрузить перевод из ресурсов
-    bool translationLoaded = false;
-    if (language == "ru_RU" || language == "ru") {
-        translationLoaded = translator.load(":/translations/timemanager_ru.qm");
-    }
-    
-    // Если не удалось загрузить из ресурсов, пробуем загрузить из файловой системы
-    if (!translationLoaded && (language == "ru_RU" || language == "ru")) {
-        // Проверяем несколько возможных путей
-        QStringList paths = {
-            QDir::currentPath() + "/translations",
-            QDir::currentPath(),
-            QApplication::applicationDirPath() + "/translations",
-            QApplication::applicationDirPath()
-        };
-        
-        for (const QString &path : paths) {
-            if (translator.load("timemanager_ru", path)) {
-                translationLoaded = true;
-                break;
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
+
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 130");
+
+    TaskManager taskManager;
+    PomodoroTimer pomodoro;
+
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        ImGui::Begin("TimeM");
+        if (ImGui::BeginTabBar("Tabs")) {
+            if (ImGui::BeginTabItem("Tasks")) {
+                static char buf[128] = "";
+                ImGui::InputText("New Task", buf, 128);
+                if (ImGui::Button("Add Task")) {
+                    taskManager.addTask(buf);
+                    buf[0] = '\0';
+                }
+                for (auto& t : taskManager.getTasks()) {
+                    ImGui::BulletText("%s", t.getName().c_str());
+                }
+                ImGui::EndTabItem();
             }
+            if (ImGui::BeginTabItem("Pomodoro")) {
+                if (ImGui::Button("Start")) pomodoro.start();
+                ImGui::SameLine();
+                if (ImGui::Button("Stop")) pomodoro.stop();
+                ImGui::Text("Time left: %d sec", pomodoro.getRemainingTime());
+                ImGui::EndTabItem();
+            }
+            if (ImGui::BeginTabItem("Statistics")) {
+                ImGui::Text("Total tasks: %zu", taskManager.getTasks().size());
+                ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
         }
+        ImGui::End();
+
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        glfwSwapBuffers(window);
     }
-    
-    // Если перевод загружен, устанавливаем его
-    if (translationLoaded) {
-        app.installTranslator(&translator);
-    }
-    
-    // Создаем и показываем главное окно
-    MainWindow mainWindow;
-    mainWindow.show();
-    
-    // Запускаем цикл обработки событий
-    return app.exec();
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return 0;
 }

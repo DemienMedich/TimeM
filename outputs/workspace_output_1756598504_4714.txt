@@ -1,8 +1,0 @@
-CMake Warning:
-  Ignoring extra path from command line:
-
-   "../CMakeLists_console.txt"
-
-
-CMake Error: Unknown argument -f
-CMake Error: Run 'cmake --help' for all supported options.
